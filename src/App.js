@@ -20,11 +20,10 @@ const App = () => {
         <Background />
         <main className="app-main">
           <section id="about" className="page-section"><About /></section>
-        <section id="skills" className="page-section"><Skills /></section>
         <section id="projects" className="page-section"><Projects /></section>
+        <section id="skills" className="page-section"><Skills /></section>
         <section id="contact" className="page-section"><Contact /></section>
       </main>
-      <PlayerStats />
       </Router>
     </ThemeProvider>
   );

@@ -114,12 +114,12 @@ const projects = [
     //demo: { type: "link", url: "https://yourdemo.link" },
     images: [
       {
-        src: project4A,
-        caption: "Buying the Mecanum wheels that will be used for Trail Blazer",
+        src: project4F,
+        caption: "Final printed version and fully ready to roll!",
         insight: {
-          eyebrow: "Mobility foundation",
-          headline: "Mecanum wheel selection",
-          body: "Omnidirectional wheels were chosen so Trail Blazer can translate and rotate independently—critical for tight mapping passes and station-keeping.",
+          eyebrow: "Release candidate",
+          headline: "Print-ready mechanical revision",
+          body: "Bracketry and enclosures were finalized for additive manufacturing so the rover could be reproduced consistently for field trials.",
         },
       },
       {
@@ -159,12 +159,13 @@ const projects = [
         },
       },
       {
-        src: project4F,
-        caption: "Final printed version and fully ready to roll!",
+
+        src: project4A,
+        caption: "Buying the Mecanum wheels that will be used for Trail Blazer",
         insight: {
-          eyebrow: "Release candidate",
-          headline: "Print-ready mechanical revision",
-          body: "Bracketry and enclosures were finalized for additive manufacturing so the rover could be reproduced consistently for field trials.",
+          eyebrow: "Mobility foundation",
+          headline: "Mecanum wheel selection",
+          body: "Omnidirectional wheels were chosen so Trail Blazer can translate and rotate independently—critical for tight mapping passes and station-keeping.",
         },
       },
       {

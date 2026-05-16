@@ -92,6 +92,7 @@ function DesktopCarouselSlide({ image, isActive, projectTitle }) {
               src={image.src}
               alt={image.caption || flip.headline}
               onLoad={(e) => apply(e.currentTarget)}
+              loading="lazy"
             />
             <span className="flip-hint">view detail</span>
           </div>
@@ -137,6 +138,7 @@ function MobileProjectImage({ img, projectTitle }) {
         src={img.src}
         alt={img.caption || flip.headline}
         onLoad={(e) => apply(e.currentTarget)}
+        loading="lazy"
       />
       <div className="mobile-caption-wrap">
         <span className="mobile-caption-eyebrow">{flip.eyebrow}</span>
@@ -321,19 +323,26 @@ export default class ProjectsMenu extends Component {
   }
 
   handleScroll = () => {
-    const { isMobile } = this.state;
+    const { isMobile, activePanelIndex: currentActive } = this.state;
     const scrollTop = window.scrollY;
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = scrollableHeight > 0 ? scrollTop / scrollableHeight : 0;
 
     if (isMobile) {
-      this.setState({ scrollProgress: progress });
+      // Only update progress occasionally or if needed, but mobile doesn't even show the progress bar.
+      if (Math.abs(this.state.scrollProgress - progress) > 0.05) {
+        this.setState({ scrollProgress: progress });
+      }
       return;
     }
 
     const sectionIdx = this.getClosestSectionIndex();
     const activePanelIndex = sectionIdx <= 0 ? null : sectionIdx - 1;
-    this.setState({ scrollProgress: progress, activePanelIndex });
+    
+    // Throttle progress updates to ~1% increments to avoid excessive renders, and only update active index if changed.
+    if (activePanelIndex !== currentActive || Math.abs(this.state.scrollProgress - progress) > 0.01) {
+      this.setState({ scrollProgress: progress, activePanelIndex });
+    }
   };
 
   scrollToPanel = (index) => {

@@ -17,8 +17,13 @@
 
 @media (max-width: 1100px) {
   .avatar.about {
-    height: 15vh;
-    width: 15vh;
-    bottom: 70%;
+    position: static;
+    transform: none;
+    left: auto;
+    bottom: auto;
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin: 0 auto;
   }
 }

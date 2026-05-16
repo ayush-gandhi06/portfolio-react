@@ -12,9 +12,13 @@ export function initThemeFromStorageAndPreference() {
     /* private mode etc. */
   }
 
-  /* First visit (no stored choice): default to dark; user toggle still persists via ThemeProvider. */
+  /* First visit (no stored choice): default to system preference */
   if (!theme) {
-    theme = "dark";
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      theme = "light";
+    } else {
+      theme = "dark";
+    }
   }
 
   document.documentElement.setAttribute("data-theme", theme);

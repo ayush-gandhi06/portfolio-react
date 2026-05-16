@@ -1,34 +1,35 @@
 /* ============================================================
-   about.css — Consolidated & Spaced
+   aboutMenu.css — Desktop absolute layout + Mobile stacked layout
    ============================================================ */
 
    @import "./tokens.css";
 
-   .about-page {
+   /* ── page wrapper ───────────────────────────────────────────
+      Desktop: 100vh so absolute children (menu, sub-container,
+               avatar, playerStats) anchor relative to the viewport.
+      Mobile:  auto height, flex column stack.
+   ─────────────────────────────────────────────────────────── */
+   .about-page-wrapper {
      position: relative;
-   }
-   
-   .content {
-     position: relative;
-     z-index: 2;
-   }
-   
-   .hero {
-     position: relative;
+     width: 100%;
      height: 100vh;
      overflow: hidden;
    }
-   
-   .hero-text {
-     position: absolute;
-     top: 50%;
-     left: 50%;
-     transform: translate(-50%, -50%);
-     z-index: 2;
-     color: var(--text-primary);
-     text-align: center;
+
+   /* Inner layer that holds the absolute-positioned about content */
+   .about-page-inner {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     z-index: 10;
+     pointer-events: none;
    }
-   
+
+   /* All direct interactive children can receive events */
+   .about-page-inner > * {
+     pointer-events: auto;
+   }
+
    /* ── resume button ──────────────────────────────────────── */
    .btn-resume {
      position: relative;
@@ -40,7 +41,7 @@
      padding: 0.4rem 315px 0.4rem 150px;
      border-radius: var(--radius-left);
      background: linear-gradient(90deg, var(--blue-deep), var(--transparent) 95%);
-     color: var(--text-primary);
+     color: #ffffff;
      font-family: var(--font-display);
      font-size: 0.75rem;
      letter-spacing: 0.30rem;
@@ -48,26 +49,26 @@
      text-decoration: none;
      transition: background 1s ease, transform 0.35s ease;
    }
-   
+
    .btn-resume:hover {
-    justify-content: center;
+     justify-content: center;
      background: linear-gradient(90deg, var(--blue-deep), var(--transparent) 95%);
-     color: var(--text-primary);
+     color: #ffffff;
      letter-spacing: 0.25rem;
      font-size: 0.875rem;
    }
-   
-   /* ── side menu ──────────────────────────────────────────── */
+
+   /* ── side menu (DESKTOP) ────────────────────────────────── */
    .menu {
      width: 19rem;
      position: absolute;
      display: flex;
      flex-direction: column;
      top: 57%;
-     transform: translateY(-60%);
      left: 20vw;
+     transform: translateY(-60%);
    }
-   
+
    .item {
      height: 4rem;
      width: 20rem;
@@ -76,91 +77,91 @@
      align-items: center;
      cursor: pointer;
    }
-   
+
    .title {
      font-size: 1.3rem;
      padding-right: 1.75rem;
      font-family: var(--font-display);
      color: var(--blue-deep);
    }
-   
+
    .item:not(.active):hover .title {
      color: var(--blue-light);
      transition: 0.4s ease-in;
    }
-   
+
    .item.active .title {
      font-size: 1.75rem;
-     color: var(--text-primary);
+     color: #ffffff;
    }
-   
-   /* ── sub-container ──────────────────────────────────────── */
+
+   /* ── sub-container (DESKTOP) ────────────────────────────── */
    .sub-container {
-     width: 28rem; /* Widened to allow text to breathe */
+     width: 28rem;
      gap: 1.5rem;
      position: absolute;
      display: flex;
      flex-direction: column;
-     top: 25%; /* Adjusted slightly for more vertical space */
+     top: 25%;
      right: 10vw;
      cursor: pointer;
      color: var(--blue-deep);
    }
-   
+
    .active-subheading {
      cursor: default;
      font-size: 1rem;
    }
-   
+
    .sub-container > div:not(.active-subheading):not(.icon-title-container):hover h3 {
      padding-left: 1.5rem;
      color: var(--blue-light);
      transition: all 0.4s ease;
    }
-   
-   /* ── active item backgrounds ────────────────────────────── */
+
+   /* ── active item backgrounds ─────────────────────────────── */
    .item.active:nth-child(1) {
      background: linear-gradient(90deg, var(--transparent), var(--blue-light) 95%);
      border-radius: var(--radius-right);
    }
-   
+
    .item.active:nth-child(2) {
      background: linear-gradient(90deg, var(--transparent), var(--blue) 95%);
      border-radius: var(--radius-right);
    }
-   
+
    .item.active:nth-child(3) {
      background: linear-gradient(90deg, var(--transparent), var(--blue-deep) 95%);
      border-radius: var(--radius-right);
    }
-   
+
    /* ── active subheading headers ──────────────────────────── */
    .sub-container-1.active-subheading h3,
    .sub-container-2.active-subheading h3,
    .sub-container-3.active-subheading h3 {
      border-radius: var(--radius-left);
-     color: var(--text-primary);
+     color: #ffffff;
      padding: 0.5rem 1rem;
      margin-bottom: 0.5rem;
    }
-   
+
    .sub-container-1.active-subheading h3 {
      background: linear-gradient(90deg, var(--blue-light), var(--transparent) 100%);
    }
-   
+
    .sub-container-2.active-subheading h3 {
      background: linear-gradient(90deg, var(--blue), var(--transparent) 100%);
    }
-   
+
    .sub-container-3.active-subheading h3 {
      background: linear-gradient(90deg, var(--blue-deep), var(--transparent) 100%);
    }
-   
-   /* ── paragraph container (The "Spaced Out" Text) ───────── */
+
+   /* ── paragraph container ────────────────────────────────── */
    .p-container {
      display: none;
    }
-   
+
    .active-subheading .p-container {
      display: flex;
      flex-direction: column;
@@ -172,45 +173,49 @@
      padding: 1rem 0;
      animation: fadeIn 0.8s ease forwards;
    }
-   
-   /* Specialized text styles for within the p-container */
+
    .cta-text {
-    
-    padding-left: 1rem;
-    font-style:normal;
-    color: var(--blue-deep);
+     padding-left: 1rem;
+     font-style: normal;
+     color: var(--blue-deep);
+   }
 
-  }
-  .cta-up-text {
-    
-    padding-left: 1rem;
-    font-style:italic;
-    color: var(--blue);
-    font-size: larger;
+   .cta-up-text {
+     padding-left: 1rem;
+     font-style: italic;
+     color: var(--blue);
+     font-size: larger;
+   }
 
-  }
-  
    .p-container p {
-    padding-left: 1rem;
+     padding-left: 1rem;
      margin: 0;
    }
-   
 
-   
    /* ── animations ─────────────────────────────────────────── */
    .sub-container > div {
      animation: grow 1.5s;
    }
-   
+
    .menu > div {
      animation: slideLeftToRight 1.5s;
    }
-   
+
    @keyframes fadeIn {
      from { opacity: 0; transform: translateY(10px); }
      to { opacity: 1; transform: translateY(0); }
    }
-   
+
+   @keyframes grow {
+     from { opacity: 0; transform: perspective(200px) translate3d(50px, 50px, 50px); }
+     to { opacity: 1; }
+   }
+
+   @keyframes slideLeftToRight {
+     from { opacity: 0; transform: perspective(200px) translate3d(-50px, -50px, -50px); }
+     to { opacity: 1; }
+   }
+
    /* ── icon-title ─────────────────────────────────────────── */
    .icon-title-container {
      font-size: 1.35rem;
@@ -220,58 +225,15 @@
      margin-top: 10px;
      margin-left: 25px;
    }
-   
+
    .icon {
      width: 2.45rem;
      height: 2.75em;
      display: flex;
      margin-top: -15px;
    }
-   
-   /* ── responsive ─────────────────────────────────────────── */
-   @media (max-width: 1100px) {
-     .menu {
-       width: 100%;
-       position: relative;
-       top: auto;
-       left: auto;
-       transform: none;
-       flex-direction: row;
-       justify-content: center;
-       padding: 2rem 0;
-     }
-   
-     .sub-container {
-       width: 90%;
-       position: relative;
-       top: auto;
-       right: auto;
-       left: auto;
-       margin: 0 auto;
-       transform: none;
-     }
-   
-     .item {
-       width: auto;
-       padding: 0.5rem 1rem;
-     }
-   
-     .p-container {
-       font-size: 0.95rem;
-     }
-   }
-   
-   @keyframes grow {
-     from { opacity: 0; transform: perspective(200px) translate3d(50px, 50px, 50px); }
-     to { opacity: 1; }
-   }
-   
-   @keyframes slideLeftToRight {
-     from { opacity: 0; transform: perspective(200px) translate3d(-50px, -50px, -50px); }
-     to { opacity: 1; }
-   }
 
-   /* Dark theme only: About copy used --blue-deep (same low-contrast family as muted blues on video dim) */
+   /* ── Dark theme overrides ────────────────────────────────── */
    html[data-theme="dark"] .menu > .item:not(.active) .title {
      color: var(--text-dim);
    }
@@ -288,13 +250,13 @@
      color: var(--text-muted);
    }
 
-   /* ── About: quick social / contact (matches sub-container rhythm) ─ */
+   /* ── Social links ────────────────────────────────────────── */
    .about-social {
      display: flex;
      flex-wrap: wrap;
      align-items: stretch;
      gap: 0.55rem;
-     margin: 0.5rem 0 1.15rem 25px;
+     margin: 0.5rem 0 1.15rem 1rem;
      padding: 0.45rem 0.5rem;
      border-radius: var(--radius-md);
      border: 1px solid var(--border);
@@ -371,10 +333,119 @@
      padding-right: 0.1rem;
    }
 
+   /* ════════════════════════════════════════════════════════════
+      MOBILE LAYOUT (≤ 1100px)
+      Stack everything vertically. All absolute positioning OFF.
+   ════════════════════════════════════════════════════════════ */
    @media (max-width: 1100px) {
+
+     /* Release the 100vh lock so everything can scroll */
+     .about-page-wrapper {
+       height: auto;
+       overflow: visible;
+     }
+
+     /* The about-page inner wrapper needs to flow naturally */
+     .about-page-inner {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       padding: 5.5rem 1rem 2rem; /* clear the nav bar */
+       gap: 2rem;
+       pointer-events: auto;
+       width: 100%;
+       height: auto;
+       position: static;
+     }
+
+     /* Menu goes horizontal and wraps */
+     .menu {
+       width: 100%;
+       position: static;
+       top: auto;
+       left: auto;
+       transform: none;
+       flex-direction: row;
+       justify-content: center;
+       flex-wrap: wrap;
+       gap: 0.5rem;
+       padding: 0;
+     }
+
+     .item {
+       width: auto;
+       height: auto;
+       padding: 0.6rem 1.2rem;
+       justify-content: center;
+     }
+
+     .title {
+       padding-right: 0;
+       font-size: 1rem;
+     }
+
+     .item.active .title {
+       font-size: 1.2rem;
+     }
+
+     /* Active menu items: restore full width gradient */
+     .item.active:nth-child(1),
+     .item.active:nth-child(2),
+     .item.active:nth-child(3) {
+       border-radius: var(--radius-md);
+       background: linear-gradient(135deg, var(--blue-deep), var(--blue-light));
+     }
+
+     /* Sub-container becomes full width, not absolute */
+     .sub-container {
+       width: 100%;
+       max-width: 520px;
+       position: static;
+       top: auto;
+       right: auto;
+       left: auto;
+       margin: 0 auto;
+       transform: none;
+       gap: 1rem;
+     }
+
+     /* Resume button adapts */
+     .btn-resume {
+       padding: 0.6rem 2rem;
+       white-space: normal;
+       text-align: center;
+       width: 100%;
+       border-radius: var(--radius-md);
+     }
+
+     /* Social links center */
      .about-social {
        margin-left: 0;
        justify-content: center;
        width: 100%;
+     }
+
+     /* paragraph text slightly smaller */
+     .p-container {
+       font-size: 0.9rem;
+     }
+   }
+
+   /* Extra small phones */
+   @media (max-width: 480px) {
+     .title {
+       font-size: 0.85rem;
+     }
+
+     .item.active .title {
+       font-size: 1rem;
+     }
+
+     .sub-container {
+       max-width: 100%;
+     }
+
+     .p-container {
+       font-size: 0.82rem;
      }
    }

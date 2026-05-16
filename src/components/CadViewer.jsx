@@ -45,7 +45,7 @@ function FitBridge({ fitApiRef }) {
   return null;
 }
 
-/** Applies camera tilt once so “reset” restores a consistent isometric look. */
+/** Applies camera tilt once so "reset" restores a consistent isometric look. */
 function IsoCameraBias() {
   const { camera } = useThree();
   useEffect(() => {
@@ -122,33 +122,26 @@ export default function CadViewer() {
   const fitApiRef = useRef(null);
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const [showHint, setShowHint] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   const resetView = useCallback(() => {
     fitApiRef.current?.();
   }, []);
 
-  useEffect(() => {
-    const t = window.setTimeout(() => setShowHint(false), 8500);
-    return () => window.clearTimeout(t);
-  }, []);
-
   return (
     <section className="cad-section" aria-label="3D mechanical assembly preview">
-      <header className="cad-section__header">
-        <span className="cad-section__dot" aria-hidden="true" />
-        <h2 className="cad-section__title">Assembly</h2>
-        <button
-          type="button"
-          className="cad-section__reset"
-          onClick={resetView}
-          aria-label="Reset view"
-        >
-          Reset view
-        </button>
-      </header>
+      <div className="cad-section__hero-text">
+        <span className="cad-section__eyebrow">INTERACTIVE 3D</span>
+        <h2 className="cad-section__headline">Go ahead, spin it around.</h2>
+        <p className="cad-section__sub">
+          This is a robot I designed — drag to orbit, scroll to zoom.
+        </p>
+      </div>
 
-      <div className="cad-section__viewport">
+      <div
+        className={`cad-section__viewport ${hasInteracted ? 'cad-section__viewport--active' : ''}`}
+        onPointerDown={() => setHasInteracted(true)}
+      >
         <Canvas
           shadows
           camera={{
@@ -170,16 +163,27 @@ export default function CadViewer() {
             makeDefault
           />
         </Canvas>
-        {showHint && (
-          <p className="cad-section__hint" role="status">
-            Drag — rotate · Scroll — zoom
-          </p>
+        {!hasInteracted && (
+          <div className="cad-section__interact-prompt" aria-hidden="true">
+            <div className="cad-section__hand-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="32" height="32">
+                <path d="M18 11V6a2 2 0 0 0-4 0v1M14 10V4a2 2 0 0 0-4 0v6M10 10.5V5a2 2 0 0 0-4 0v9"/>
+                <path d="M18 11a2 2 0 0 1 4 0v3a8 8 0 0 1-8 8h-2c-2.5 0-4-1.3-5.3-3.2L4 14"/>
+              </svg>
+            </div>
+            <span>Drag to explore</span>
+          </div>
         )}
       </div>
 
-      <p className="cad-section__message">
-        Here&apos;s a little something I&apos;ve been working on — drag to orbit and take a closer look.
-      </p>
+      <button
+        type="button"
+        className="cad-section__reset"
+        onClick={resetView}
+        aria-label="Reset view"
+      >
+        ↻ Reset view
+      </button>
     </section>
   );
 }

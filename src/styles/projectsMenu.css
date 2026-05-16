@@ -51,10 +51,7 @@
    /* ── reset ───────────────────────────────────────────────── */
    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
    
-   /* Hide default cursor on desktop */
-   @media (pointer: fine) {
-     .projects-section * { cursor: none !important; }
-   }
+   /* Removed rule that hid cursor on desktop */
    
    /* ══════════════════════════════════════════════════════════
       SECTION WRAPPER — now vertical
@@ -174,6 +171,7 @@
      font-weight: 500;
      color: var(--royal-light);
      letter-spacing: 0.35rem;
+     margin-right: -0.35rem;
    }
    
    .intro-heading-bold {
@@ -181,6 +179,7 @@
      font-weight: 800;
      color: var(--royal-light);
      letter-spacing: 0.35rem;
+     margin-right: -0.35rem;
    }
    
    .intro-sub {
@@ -284,7 +283,8 @@
      flex-direction: row;
      gap: 0;
      align-items: stretch;
-     border: 1px solid rgba(255, 255, 255, 0.12);
+     background: var(--bg-base);
+     border: 1px solid var(--border-strong);
      border-radius: var(--card-radius);
      backdrop-filter: blur(16px);
      -webkit-backdrop-filter: blur(16px);

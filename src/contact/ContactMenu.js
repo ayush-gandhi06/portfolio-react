@@ -54,15 +54,6 @@ const ArrowIcon = () => (
 // ── contact platform data ────────────────────────────────────
 const platforms = [
   {
-    id: "email",
-    label: "Email",
-    handle: "a54gandh@uwaterloo.ca",
-    href: PROFILE_EMAIL_MAILTO,
-    Icon: EmailIcon,
-    cta: "Send a message",
-    note: "Usually responds within 24 hrs",
-  },
-  {
     id: "instagram",
     label: "Instagram",
     handle: "@imayushgandhi",
@@ -71,6 +62,16 @@ const platforms = [
     cta: "Follow along",
     note: "Behind-the-scenes & builds",
   },
+  {
+    id: "email",
+    label: "Email",
+    handle: "a54gandh@uwaterloo.ca",
+    href: PROFILE_EMAIL_MAILTO,
+    Icon: EmailIcon,
+    cta: "Send a message",
+    note: "Usually responds within 24 hrs",
+  },
+  
   {
     id: "linkedin",
     label: "LinkedIn",

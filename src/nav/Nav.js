@@ -1,17 +1,42 @@
 import React, { useState, useEffect } from 'react';
-//import ThemeToggle from '../theme/ThemeToggle';
-import astraunautHelmet from '../assets/astronaut-helmet.png';
-import deadEye from '../assets/dead-eye.png';
-import stack from '../assets/stack.png';
-import envelope from '../assets/envelope.png';
 import '../styles/nav.css';
+
+const UserIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="nav-icon">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+    <circle cx="12" cy="7" r="4"/>
+  </svg>
+);
+
+const StackIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="nav-icon">
+    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+    <polyline points="2 12 12 17 22 12"/>
+    <polyline points="2 17 12 22 22 17"/>
+  </svg>
+);
+
+const TargetIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="nav-icon">
+    <circle cx="12" cy="12" r="10"/>
+    <circle cx="12" cy="12" r="6"/>
+    <circle cx="12" cy="12" r="2"/>
+  </svg>
+);
+
+const EnvelopeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="nav-icon">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+    <polyline points="22,6 12,13 2,6"/>
+  </svg>
+);
 
 export default function Nav() {
   const [activeSection, setActiveSection] = useState('about');
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'skills', 'projects', 'contact'];
+      const sections = ['about', 'projects', 'skills', 'contact'];
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
       for (const section of sections) {
@@ -53,7 +78,7 @@ export default function Nav() {
     }
   };
 
-  const renderNavLink = (sectionId, imgSrc, altText) => {
+  const renderNavLink = (sectionId, IconComponent) => {
     const isCurrent = activeSection === sectionId;
     const linkClass = isCurrent ? "nav-link current" : "nav-link";
     const pageTitle = getPageTitle(sectionId);
@@ -64,7 +89,7 @@ export default function Nav() {
         className={linkClass}
         onClick={(e) => scrollToSection(e, sectionId)}
       >
-        <img src={imgSrc} alt={altText}/>
+        <IconComponent />
         {isCurrent && <h1 className="page-title">{pageTitle}</h1>}
       </a>
     );
@@ -73,13 +98,11 @@ export default function Nav() {
   return (
     <>
       <nav className="nav"> 
-        {renderNavLink("about", astraunautHelmet, "astraunaut helmet icon")}
-        {renderNavLink("skills", deadEye, "dead eye icon")}
-        {renderNavLink("projects", stack, "stack icon")}
-        {renderNavLink("contact", envelope, "envelope icon")}
+        {renderNavLink("about", UserIcon)}
+        {renderNavLink("projects", StackIcon)}
+        {renderNavLink("skills", TargetIcon)}
+        {renderNavLink("contact", EnvelopeIcon)}
       </nav>
-      {/* ThemeToggle has been moved to App.js directly but we can keep it here if preferred. 
-          Actually, we already added it to App.js, so we don't need it here to avoid duplication. */}
     </>
   );
 }

@@ -76,10 +76,11 @@
      gap: clamp(28px, 4vw, 48px);
    }
 
-   /* Leave horizontal room for fixed nav + “CONTACT” label (desktop) */
+   /* Centered hero on desktop without forced padding */
    @media (min-width: 1101px) {
      .contact-hero {
-       padding-left: max(clamp(28px, 8vw, 120px), 13.5rem);
+       padding-left: clamp(28px, 8vw, 120px);
+       justify-content: center;
      }
    }
    
@@ -155,13 +156,32 @@
      margin-top: clamp(0.35rem, 1.5vh, 1rem);
      font-size: clamp(4.5rem, 11vw, 11rem);
      font-weight: 800;
-     color: var(--text-primary);
+     color: transparent;
+     background: linear-gradient(90deg, var(--blue-light), var(--purple-accent));
+     -webkit-background-clip: text;
+     background-clip: text;
      letter-spacing: clamp(-0.12rem, -0.4vw, -0.15rem);
      opacity: 0;
      animation: fade-right 0.75s var(--ease-spring) 0.38s forwards;
      text-shadow: 0 0 16px var(--text-accent);
      word-wrap: break-word;
      overflow-wrap: anywhere;
+   }
+   
+   html[data-theme="light"] .hero-bold {
+     color: #ffffff;
+     background: none;
+     -webkit-text-fill-color: #ffffff;
+     text-shadow: 0 0 20px rgba(37, 99, 235, 0.8), 0 0 40px rgba(59, 130, 246, 0.6), 0 0 60px rgba(37, 99, 235, 0.3);
+   }
+   
+   html[data-theme="dark"] .hero-bold {
+     color: #ffffff;
+     background: none;
+     -webkit-background-clip: unset;
+     background-clip: unset;
+     -webkit-text-fill-color: #ffffff;
+     text-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 40px rgba(139, 92, 246, 0.6), 0 0 60px rgba(168, 85, 247, 0.3);
    }
    
    .hero-sub {

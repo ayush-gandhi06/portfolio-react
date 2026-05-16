@@ -3,9 +3,27 @@ import AboutMenuItem from "./AboutMenuItems.js"
 import AboutSubheading from "./AboutSubheading.js"
 import AboutSocialLinks from "./AboutSocialLinks";
 import subheadingsData from "./subheadingsData.js"
-import personalIcon from "../assets/moebius-triangle.png";
-import educationIcon from "../assets/upgrade.png";
-import careerIcon from "../assets/triple-corn.png";
+
+const PersonalIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon" style={{ width: "2.45rem", height: "2.75em", marginTop: "-15px" }}>
+    <path d="M12 2L2 22h20L12 2z"/>
+    <path d="M12 10l-4 8h8l-4-8z"/>
+  </svg>
+);
+
+const EducationIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon" style={{ width: "2.45rem", height: "2.75em", marginTop: "-15px" }}>
+    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+  </svg>
+);
+
+const CareerIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon" style={{ width: "2.45rem", height: "2.75em", marginTop: "-15px" }}>
+    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+  </svg>
+);
 
 export default class AboutMenu  extends Component {
     constructor (props){
@@ -36,10 +54,10 @@ export default class AboutMenu  extends Component {
         const{activeMenuItem, activeSubheading} = this.state;
         const menuItems =["PERSONAL", "EDUCATION", "RESUME"];
         const activeMenuTitle = menuItems[activeMenuItem -1];
-        const activeMenuIcon=
-            activeMenuTitle==="PERSONAL"? personalIcon
-            : activeMenuTitle==="EDUCATION"? educationIcon
-            :careerIcon;
+        const ActiveMenuIcon =
+            activeMenuTitle==="PERSONAL"? PersonalIcon
+            : activeMenuTitle==="EDUCATION"? EducationIcon
+            : CareerIcon;
 
       
         const subheadings = subheadingsData[activeMenuItem] || [];
@@ -58,7 +76,7 @@ export default class AboutMenu  extends Component {
     </div>
     <div className="sub-container">
       <div className="icon-title-container">
-        <img src={activeMenuIcon} alt={activeMenuTitle} className="icon"/>
+        <ActiveMenuIcon />
         <h3>{activeMenuTitle}</h3>
       </div>
       <AboutSocialLinks />
