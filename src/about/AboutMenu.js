@@ -52,7 +52,7 @@ export default class AboutMenu  extends Component {
     render() {
 
         const{activeMenuItem, activeSubheading} = this.state;
-        const menuItems =["PERSONAL", "EDUCATION", "RESUME"];
+        const menuItems =["PERSONAL", "EDUCATION", "EXPERIENCE"];
         const activeMenuTitle = menuItems[activeMenuItem -1];
         const ActiveMenuIcon =
             activeMenuTitle==="PERSONAL"? PersonalIcon
@@ -79,7 +79,6 @@ export default class AboutMenu  extends Component {
         <ActiveMenuIcon />
         <h3>{activeMenuTitle}</h3>
       </div>
-      <AboutSocialLinks />
       {subheadings.map((subheading, index) => (
         <AboutSubheading
           key={index}
@@ -90,11 +89,7 @@ export default class AboutMenu  extends Component {
           menuItem={activeMenuItem}
         />
       ))}
-      {activeMenuTitle === "RESUME" && (
-        <a href="Ayush_1B.pdf" download="ayushGandhi_Resume.pdf" className="btn-resume">
-          ↓ CHECK OUT MY RESUME
-        </a>
-      )}
+
     </div>
   </>
 );

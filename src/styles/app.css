@@ -28,7 +28,7 @@ body,
 }
 
 .page-section {
-  min-height: 100vh;
+  min-height: 70vh;
   width: 100%;
   position: relative;
 }

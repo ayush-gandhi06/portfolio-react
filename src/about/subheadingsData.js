@@ -51,16 +51,37 @@ const subheadingsData = {
   ],
   3: [
     {
-      title: "Click Down Below",
+      title: "WATonomous Humanoid Team Member ",
       content: (
         <>
           <p>
-            A showcase of my hands-on engineering projects and the technical problem-solving skills I've built along the way.
+          Contributing to the mechanical design of a 15-DOF humanoid robotic arm using Onshape by assisting with forearm/joint design,
+          prototyping, design review and component assembly to ensure dexterous hand mobility.
+          </p>
+        </>
+      ),
+    },
+    {
+      title: "Engineering and Trades Learning Assistant ",
+      content: (
+        <>
+          <p>
+          Ran CAD, electronics, and fabrication sessions, helping students debug wiring, fix driver configs, and get hardware working.
+          </p>
+        </>
+      ),
+    },
+    {
+      title: "FIRST Robotics Mechanical Team Lead ",
+      content: (
+        <>
+          <p>
+          Designed an 800 g motorized arm in SolidWorks, ran load analysis on the model, and got 15% better mechanical efficiency out
+          of the final version.
           </p>
         </>
       ),
     }
-    
   ],
 };
 

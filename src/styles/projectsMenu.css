@@ -235,13 +235,13 @@
       PROJECT PANELS — vertical, full-section layout
    ══════════════════════════════════════════════════════════ */
    .project-panel {
-    min-height: 100vh;
+    min-height: 65vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 6em 20vw;
+    padding: 4em 10vw;
   }
   
   /* ambient background number */
