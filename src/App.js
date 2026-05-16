@@ -1,6 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "./theme/ThemeContext";
+import ThemeToggle from "./theme/ThemeToggle";
 import Nav from "./nav/Nav.js";
 import About from "./about/About.js";
 import Skills from "./skills/Skills.js";
@@ -14,17 +15,16 @@ const App = () => {
   return (
     <ThemeProvider>
       <Router>
+        <ThemeToggle />
         <Nav />
         <Background />
         <main className="app-main">
-          <Routes>
-            <Route path="/" element={<About />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-        <PlayerStats />
+          <section id="about" className="page-section"><About /></section>
+        <section id="skills" className="page-section"><Skills /></section>
+        <section id="projects" className="page-section"><Projects /></section>
+        <section id="contact" className="page-section"><Contact /></section>
+      </main>
+      <PlayerStats />
       </Router>
     </ThemeProvider>
   );

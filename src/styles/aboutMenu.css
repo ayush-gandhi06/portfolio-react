@@ -60,7 +60,7 @@
    /* ── side menu ──────────────────────────────────────────── */
    .menu {
      width: 19rem;
-     position: fixed;
+     position: absolute;
      display: flex;
      flex-direction: column;
      top: 57%;
@@ -98,7 +98,7 @@
    .sub-container {
      width: 28rem; /* Widened to allow text to breathe */
      gap: 1.5rem;
-     position: fixed;
+     position: absolute;
      display: flex;
      flex-direction: column;
      top: 25%; /* Adjusted slightly for more vertical space */

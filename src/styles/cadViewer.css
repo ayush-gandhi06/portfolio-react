@@ -3,7 +3,7 @@
 /* Docked chip: bottom-left — keeps fixed resume column (sub-container right) clear */
 
 .cad-section {
-  position: fixed;
+  position: absolute;
   z-index: 11;
   /* Center under the menu text labels (menu left:20vw, items right-aligned within 20rem) */
   left: calc(20vw + 14rem);

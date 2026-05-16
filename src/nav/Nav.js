@@ -1,85 +1,85 @@
-/*\"this is my naiguation bar at the top of the page. I need it to go around my website. Its better than using tags because this way, using the react plateform, i dont need to refressh my browser. it makes it feel much smoother and more like  an app."*/
-
-
-import React from 'react'
-import {Link, useLocation} from 'react-router-dom'
-import ThemeToggle from '../theme/ThemeToggle'
-import astraunautHelmet from '../assets/astronaut-helmet.png'
-import deadEye from '../assets/dead-eye.png'
-import stack from '../assets/stack.png'
-import envelope from '../assets/envelope.png'
-import '../styles/nav.css'
+import React, { useState, useEffect } from 'react';
+import ThemeToggle from '../theme/ThemeToggle';
+import astraunautHelmet from '../assets/astronaut-helmet.png';
+import deadEye from '../assets/dead-eye.png';
+import stack from '../assets/stack.png';
+import envelope from '../assets/envelope.png';
+import '../styles/nav.css';
 
 export default function Nav() {
-  const location = useLocation();
-  const getNavPositionClass = () => {
-    switch(location.pathname) {
-      case '/':
-        return "nav-about"
-      case '/skills':
-        return "nav-skills"
-      case '/projects':
-        return "nav-projects"
-      case '/contact':
-        return "nav-contact"
-      default:
-        return ""
+  const [activeSection, setActiveSection] = useState('about');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'skills', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { top, bottom } = element.getBoundingClientRect();
+          const elementTop = top + window.scrollY;
+          const elementBottom = bottom + window.scrollY;
+
+          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const getPageTitle = (section) => {
+    switch(section) {
+      case 'about': return "ABOUT";
+      case 'skills': return "SKILLS";
+      case 'projects': return "PROJECTS";
+      case 'contact': return "CONTACT";
+      default: return "";
     }
   };
 
-  const getPageTitle = () => {
-    switch(location.pathname) {
-      case '/':
-        return "ABOUT"
-      case '/skills':
-        return "SKILLS"
-      case '/projects':
-        return "PROJECTS"
-      case '/contact':
-        return "CONTACT"
-      default:
-        return ""
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-
   };
 
-  const navPositionClass = getNavPositionClass();
-  const pageTitle = getPageTitle(); 
-
-
-
-
-
-
-
-  const isCurrentPage = (navClass)=> {
-    return (navClass===navPositionClass)  
-  };
-
-  const renderNavLink= ( to, imgSrc, altText, navClass) => {
-    const isCurrent= isCurrentPage(navClass);
-    const linkClass = isCurrent ? "nav-link current" :"nav-link"
-    
+  const renderNavLink = (sectionId, imgSrc, altText) => {
+    const isCurrent = activeSection === sectionId;
+    const linkClass = isCurrent ? "nav-link current" : "nav-link";
+    const pageTitle = getPageTitle(sectionId);
 
     return (
-      <Link to={to} className={linkClass}>
-        <img src = {imgSrc} alt={altText}/>
-        {isCurrent && <h1 className= "page-title">{pageTitle}
-        </h1>}
-    
-      </Link>
+      <a 
+        href={`#${sectionId}`} 
+        className={linkClass}
+        onClick={(e) => scrollToSection(e, sectionId)}
+      >
+        <img src={imgSrc} alt={altText}/>
+        {isCurrent && <h1 className="page-title">{pageTitle}</h1>}
+      </a>
     );
   };
-  
-    return (
-      <>
-      <nav className={`nav ${navPositionClass}`}> 
-        {renderNavLink( "/", astraunautHelmet,"astraunaut helmet icon","nav-about")}
-        {renderNavLink("/skills", deadEye, "dead eye icon", "nav-skills")}
-        {renderNavLink("/projects", stack, "stack icon", "nav-projects" )}
-        {renderNavLink( "/contact",envelope, "envelope icon", "nav-contact")}
+
+  return (
+    <>
+      <nav className="nav"> 
+        {renderNavLink("about", astraunautHelmet, "astraunaut helmet icon")}
+        {renderNavLink("skills", deadEye, "dead eye icon")}
+        {renderNavLink("projects", stack, "stack icon")}
+        {renderNavLink("contact", envelope, "envelope icon")}
       </nav>
-      <ThemeToggle />
-      </>
-    );
-  };
+      {/* ThemeToggle has been moved to App.js directly but we can keep it here if preferred. 
+          Actually, we already added it to App.js, so we don't need it here to avoid duplication. */}
+    </>
+  );
+}

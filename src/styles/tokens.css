@@ -178,11 +178,11 @@ html[data-theme="dark"] {
   --purple-dim: rgba(100, 80, 180, 0.38);
   --purple-muted: rgba(190, 176, 240, 0.92);
 
-  --text-primary: #eef1fc;
+  --text-primary: #ffffff;
   /* Secondary copy: brighter on dimmed video / deep navy (still below primary) */
-  --text-dim: rgba(216, 222, 248, 0.82);
-  --text-muted: rgba(148, 160, 208, 0.65);
-  --text-accent: #9aa6da;
+  --text-dim: #ffffff;
+  --text-muted: #ffffff;
+  --text-accent: #ffffff;
 
   --muted: rgba(188, 176, 232, 0.82);
 
@@ -190,12 +190,12 @@ html[data-theme="dark"] {
   --border-strong: rgba(110, 92, 188, 0.42);
   --border-white: rgba(255, 255, 255, 0.06);
 
-  --nav-text-fill: #8b96d4;
-  --nav-link-hover: #e4e8fc;
-  --nav-page-title: #c4b8ec;
+  --nav-text-fill: #ffffff;
+  --nav-link-hover: #ffffff;
+  --nav-page-title: #ffffff;
 
-  --player-heading: #9aa6da;
-  --player-subheading: #7a86bc;
+  --player-heading: #ffffff;
+  --player-subheading: #ffffff;
   --player-line-accent: #6b52c9;
   --player-line-muted: rgba(165, 176, 210, 0.58);
 
@@ -215,12 +215,12 @@ html[data-theme="dark"] {
   --card-icon-ink: #eef1fc;
 
   --skills-fade-bg: var(--bg-deep);
-  --skills-subtitle: #7a86bc;
-  --skills-title: #8f9bd4;
+  --skills-subtitle: #ffffff;
+  --skills-title: #ffffff;
   --skills-underline: #9d8ae0;
   --skills-category: #c4b8ec;
   --skills-category-border: rgba(118, 98, 200, 0.45);
-  --skills-bubble-text: #d8ddff;
+  --skills-bubble-text: #ffffff;
   --skills-bubble-bg: rgba(45, 36, 104, 0.2);
   --skills-bubble-border: rgba(90, 106, 180, 0.45);
   --skills-bubble-hover-bg: rgba(74, 58, 140, 0.28);

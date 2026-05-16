@@ -69,13 +69,9 @@
 
    /* Desktop: one full-viewport “page” per intro/project; snap centers each block */
    .projects-desktop-scroll {
-     height: 100vh;
-     overflow-y: auto;
-     overflow-x: hidden;
-     scroll-snap-type: y mandatory;
-     scroll-behavior: smooth;
-     overscroll-behavior-y: contain;
-     -webkit-overflow-scrolling: touch;
+     width: 100%;
+     display: flex;
+     flex-direction: column;
    }
 
    .intro-panel,
