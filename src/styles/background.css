@@ -1,0 +1,54 @@
+#bg {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -3;
+}
+
+.shadow-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--shadow-overlay);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Extra dim — stacked above base shadow; opacity 0 in light mode */
+.bg-theme-dim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--bg-video-extra-dim);
+  opacity: 0;
+  transition: opacity 0.45s ease, background 0.45s ease;
+}
+
+html[data-theme="dark"] .bg-theme-dim {
+  opacity: 1;
+}
+
+@media (max-width: 1100px) {
+  #bg {
+    object-fit: fill;
+    width: 110vw;
+    height: 230vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -3;
+  }
+
+  .shadow-overlay {
+    background-color: var(--shadow-overlay-mobile);
+  }
+}

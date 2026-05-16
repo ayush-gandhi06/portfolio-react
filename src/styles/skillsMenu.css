@@ -1,0 +1,257 @@
+@import "./tokens.css";
+
+.skills-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 6rem;
+    box-sizing: border-box;
+}
+
+/* ---- HEADER ---- */
+.skills-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    animation: fadeSlideDown 0.8s ease forwards;
+}
+
+.skills-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.2rem;
+    color: var(--skills-subtitle);
+    opacity: 0.7;
+    text-transform:capitalize;
+    margin: 0 0 0.5rem 0;
+}
+
+.skills-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--skills-title);
+    letter-spacing: 0.3rem;
+    margin: 0;
+    text-underline-offset: 0.3rem;
+    text-decoration:underline;
+    text-decoration-color: var(--skills-underline);
+}
+
+/* ---- SECTIONS ---- */
+.skills-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.skills-section {
+    opacity: 0;
+    animation: fadeSlideUp 0.6s ease forwards;
+}
+
+.category-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.35rem;
+    text-transform: uppercase;
+    color: var(--skills-category);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--skills-category-border);
+}
+
+/* ---- BUBBLES ---- */
+.bubbles-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+}
+
+.bubble {
+    opacity: 0;
+    animation: popIn 0.4s ease forwards;
+
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    letter-spacing: 0.09rem;
+    color: var(--skills-bubble-text);
+    background: var(--skills-bubble-bg);
+    border: 1px solid var(--skills-bubble-border);
+    cursor: default;
+
+    transition: 
+        background 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.bubble:hover {
+    background: var(--skills-bubble-hover-bg);
+    border-color: var(--skills-bubble-hover-border);
+    transform: translateY(-2px);
+    box-shadow: 0 0px 8px var(--skills-bubble-hover-shadow);
+}
+
+/* ---- ANIMATIONS ---- */
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* hide on desktop */
+.skills-wrapper .scroll-cue {
+  display: none;
+}
+
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1100px) {
+
+  /* ── the actual clipping window ── */
+  .skills-page {
+    max-height: 70vh;        /* ← this is your window size, change freely */
+    overflow: hidden;        /* ← hard clip — nothing escapes this */
+    position: relative;      /* ← needed for the pseudo fade overlays */
+    padding: 5rem 2rem;
+  }
+
+  .skills-page.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── scrollable inner content ── */
+  .skills-content {
+    max-height: 100%;
+    overflow-y: auto;        /* ← scroll lives here, inside the clip */
+    scrollbar-width: none;   /* hide scrollbar Firefox */
+    -ms-overflow-style: none;/* hide scrollbar IE */
+  }
+
+  .skills-content::-webkit-scrollbar {
+    display: none;           /* hide scrollbar Chrome/Safari */
+  }
+
+  /* ── fade overlays using pseudo elements on skills-page ── */
+  .skills-page::before,
+  .skills-page::after {
+    content: "";
+    position: absolute;
+    left: 2rem;
+    right: 2rem;
+    height: 10px;            /* ← how tall the fade zone is, change freely */
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  /* top fade */
+  .skills-page::before {
+    top: 19.35rem;
+    background: linear-gradient(to bottom, var(--skills-fade-bg) 0%, transparent 100%);
+  }
+
+  /* bottom fade */
+  .skills-page::after {
+    bottom: 5rem;
+    background: linear-gradient(to top, var(--skills-fade-bg) 0%, transparent 100%);
+  }
+  .scroll-cue {
+    top: 7.5rem;
+    left: 0.5rem;
+    z-index: -2;
+}
+
+  .scroll-cue-text {
+    position: fixed;
+    top: 2.5rem;
+    left: 1.5rem;
+    font-size: 2.875rem;
+    letter-spacing: 0.25rem;
+    color: var(--muted);
+    writing-mode: vertical-lr;
+    text-orientation: upright; 
+}
+
+  .scroll-cue-arrows {
+     position: fixed;
+    top: 9.5rem;
+    left: 1.1rem;
+    transform: rotate(90deg);
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  
+  .scroll-arrow {
+    width: 10px;
+    height: 10px;
+    border-right: 1.5px solid var(--lilac);
+    border-bottom: 1.5px solid var(--lilac);
+    transform: rotate(-80deg);
+    animation: pulse-down 1.6s ease-in-out infinite;
+  }
+
+  .scroll-arrow:nth-child(2) {
+    animation-delay: 0.2s;
+    opacity: 0.5;
+  }
+
+  @keyframes pulse-down {
+
+    0%, 100% { transform: rotate(75deg) translateX(0px);  opacity: 1;   }
+    50%       { transform: rotate(90deg) translateX(50px);  opacity: 0.3; }
+  }
+  .skills-title {
+        font-size: 3.5rem;
+        z-index: -8;
+    }
+    .bubble {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+    z-index: -8;
+}
+.category-title {
+    font-size: 0.9rem;
+    letter-spacing: 0.15rem;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.2rem;
+}
+  .skills-wrapper .scroll-cue {
+    display: flex;
+  }
+}
+
+
+
+

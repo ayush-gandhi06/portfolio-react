@@ -1,0 +1,26 @@
+@import "./tokens.css";
+
+/* App-level: keep hover affordances aligned with token colors */
+button:hover,
+.class-sub-container a:hover,
+.project-container a:hover,
+.sub-container-2:not(.active-subheading):hover,
+.sub-container-3:not(.active-subheading):hover {
+  color: var(--text-primary);
+  border: 2px solid var(--transparent);
+  transition: all 0.5s ease;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Main scroll surface stacks above background; contact omits PlayerStats so copy stays clear */
+.app-main {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+}

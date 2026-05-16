@@ -1,0 +1,213 @@
+@import "./tokens.css";
+
+/* Docked chip: bottom-left — keeps fixed resume column (sub-container right) clear */
+
+.cad-section {
+  position: fixed;
+  z-index: 11;
+  /* Center under the menu text labels (menu left:20vw, items right-aligned within 20rem) */
+  left: calc(20vw + 14rem);
+  top: 65%;
+  transform: translateX(-50%);
+  width: min(21.875rem, 88vw);
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.69rem 0.78rem 0.78rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--bg-glass) 92%, var(--purple-deep)),
+    color-mix(in srgb, var(--bg-glass) 85%, var(--blue-deep))
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.18),
+    0 0 20px var(--blue-glow);
+  pointer-events: auto;
+  animation: cadDockIn 0.75s var(--ease-out) forwards;
+}
+
+.cad-section__header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.1rem;
+}
+
+.cad-section__dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--purple-accent);
+  box-shadow: 0 0 8px var(--purple-glow);
+  flex-shrink: 0;
+}
+
+html[data-theme="dark"] .cad-section__dot {
+  background: #c8bafc;
+}
+
+.cad-section__title {
+  flex: 1;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.cad-section__reset {
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--surface-elevated) 50%, transparent);
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.cad-section__reset:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  box-shadow: 0 0 12px var(--purple-glow);
+}
+
+.cad-section__reset:focus-visible {
+  outline: 2px solid var(--purple-accent);
+  outline-offset: 2px;
+}
+
+.cad-section__viewport {
+  position: relative;
+  height: 12.5rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-deep) 58%, transparent);
+  cursor: grab;
+  touch-action: none;
+}
+
+.cad-section__viewport:active {
+  cursor: grabbing;
+}
+
+.cad-section__viewport canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.cad-section__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 0.35rem;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--bg-deep) 80%, transparent);
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  pointer-events: none;
+  opacity: 0.95;
+  animation: cadHintOut 0.45s ease 7.5s forwards;
+}
+
+.cad-section__loading {
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-deep) 82%, transparent);
+}
+
+.cad-section__message {
+  margin: 0;
+  padding: 0 0.15rem 0;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.46;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+@keyframes cadDockIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes cadHintOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 1100px) {
+  .cad-section {
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+    width: min(21.875rem, 90vw);
+    margin: 1.5rem auto;
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .cad-section {
+    width: min(94vw, 22rem);
+    padding: 0.5rem;
+  }
+
+  .cad-section__viewport {
+    height: 11rem;
+  }
+
+  .cad-section__message {
+    font-size: 0.58rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cad-section,
+  .cad-section__hint {
+    animation: none;
+  }
+}

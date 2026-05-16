@@ -1,0 +1,44 @@
+/* ============================================================
+   global.css — base styles + avatar
+   Replaces: body.css + avatar.css
+   Requires: tokens.css imported before this
+   ============================================================ */
+
+   @import "./tokens.css";
+
+   /* ── interactive element resets ─────────────────────────── */
+   button:hover,
+   .class-sub-container a:hover,
+   .project-container a:hover,
+   .sub-container-2:not(.active-subheading):hover,
+   .sub-container-3:not(.active-subheading):hover {
+     color: var(--text-primary);
+     border: 2px solid var(--transparent);
+     transition: all 0.5s ease;
+   }
+   
+   /* ── avatar ──────────────────────────────────────────────── */
+   .avatar {
+     position: fixed;
+     overflow: hidden;
+     z-index: 4;
+     border-radius: 50%;
+     object-fit: cover;
+     filter: drop-shadow(0px 0px 25px var(--blue));
+   }
+   
+   .avatar.about {
+     width: 20vh;
+     height: 20vh;
+     bottom: 28rem;
+     left: 50%;
+     transform: translateX(-50%);
+   }
+   
+   @media (max-width: 1100px) {
+     .avatar.about {
+       height: 15vh;
+       width: 15vh;
+       bottom: 70%;
+     }
+   }

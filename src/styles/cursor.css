@@ -1,0 +1,87 @@
+/* ============================================================
+   cursor.css — hexagon cursor (site-wide)
+   Import this in every page after tokens.css.
+   ============================================================ */
+
+@import "./tokens.css";
+
+/* ── hide native cursor everywhere ─────────────────────────── */
+*,
+*::before,
+*::after {
+  cursor: none !important;
+}
+
+/* ── hex cursor elements ────────────────────────────────────── */
+.hex-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  will-change: transform;
+}
+
+.hex-cursor__outer {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: transparent;
+  border: 2px solid var(--cursor-hex-border);
+}
+
+.hex-cursor__outer-wrap {
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: var(--cursor-hex-fill);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+}
+
+.hex-cursor__outer-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: var(--cursor-hex-inner);
+}
+
+.hex-cursor__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cursor-hex-dot);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 6px var(--cursor-hex-dot), 0 0 14px var(--cursor-hex-dot-glow);
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.hex-cursor.is-hovering .hex-cursor__outer-wrap {
+  transform: translate(-50%, -50%) scale(1.5);
+  background: var(--cursor-hover-fill);
+}
+
+.hex-cursor.is-hovering .hex-cursor__outer-wrap::before {
+  background: var(--cursor-hover-inner);
+}
+
+.hex-cursor.is-hovering .hex-cursor__dot {
+  transform: translate(-50%, -50%) scale(1.6);
+  background: var(--cursor-hover-dot);
+  box-shadow: 0 0 10px var(--cursor-hover-dot), 0 0 24px var(--cursor-hover-glow);
+}
+
+.hex-cursor.is-clicking .hex-cursor__outer-wrap {
+  transform: translate(-50%, -50%) scale(0.85);
+}
