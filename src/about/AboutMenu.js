@@ -1,7 +1,7 @@
 import React,{ Component } from "react";
 import AboutMenuItem from "./AboutMenuItems.js"
 import AboutSubheading from "./AboutSubheading.js"
-import AboutSocialLinks from "./AboutSocialLinks";
+//import AboutSocialLinks from "./AboutSocialLinks";
 import subheadingsData from "./subheadingsData.js"
 
 const PersonalIcon = () => (
