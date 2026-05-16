@@ -192,50 +192,13 @@ function projectHasAnyLink(project) {
   return projectHasGithub(project) || projectHasDemo(project);
 }
 
-// ── Per-panel scroll-animate wrapper ─────────────────────────
-class AnimatedPanel extends Component {
-  constructor(props) {
-    super(props);
-    this.ref = createRef();
-    this.state = { visible: false };
-  }
-
-  componentDidMount() {
-    this.observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          this.setState({ visible: true });
-          this.observer.disconnect(); // fire once, like Apple
-        }
-      },
-      { threshold: 0.12 }
-    );
-    if (this.ref.current) this.observer.observe(this.ref.current);
-  }
-
-  componentWillUnmount() {
-    if (this.observer) this.observer.disconnect();
-  }
-
-  render() {
-    const { children, delay = 0 } = this.props;
-    const { visible } = this.state;
-    return (
-      <div
-        ref={this.ref}
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0px)" : "translateY(60px)",
-          transition: `opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}ms,
-                       transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}ms`,
-          willChange: "opacity, transform",
-          width: "100%",
-        }}
-      >
-        {children}
-      </div>
-    );
-  }
+// ── Per-panel wrapper (animation removed) ─────────────────────
+function AnimatedPanel({ children }) {
+  return (
+    <div style={{ width: "100%" }}>
+      {children}
+    </div>
+  );
 }
 
 // ── Main component ────────────────────────────────────────────
