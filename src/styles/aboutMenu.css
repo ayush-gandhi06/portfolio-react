@@ -439,7 +439,7 @@ html[data-theme="dark"] .cta-text {
 }
 
 /* ════════════════════════════════════════════════════════════
-   MOBILE (≤ 1100px) — clean stacked layout, no background CAD
+   MOBILE (≤ 1100px) — stacked layout; robot stays via cadViewerBg.css
 ════════════════════════════════════════════════════════════ */
 @media (max-width: 1100px) {
 

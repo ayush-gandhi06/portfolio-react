@@ -1,0 +1,363 @@
+/* ============================================================
+   iphone.css — phone-only (≤767px). Desktop / laptop unchanged.
+   ============================================================ */
+
+@import "./tokens.css";
+
+@media (max-width: 767px) {
+
+  /* ── About shell: robot behind, content scrolls naturally ── */
+  .about-wrapper {
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    padding-top: 0;
+  }
+
+  /* Sit below fixed nav pill — name block and social icons get their own rows */
+  .about-topbar {
+    position: fixed;
+    top: 3.85rem;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0 1rem;
+  }
+
+  .about-topbar__center {
+    width: auto;
+    max-width: 20rem;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.45rem 1rem 0.45rem 0.45rem;
+  }
+
+  .about-topbar__name-block {
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-topbar__divider-row {
+    justify-content: center;
+  }
+
+  .about-topbar__name {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    line-height: 1.25;
+  }
+
+  .about-topbar__title {
+    font-size: 0.5rem;
+    line-height: 1.4;
+    margin-top: 0.15rem;
+  }
+
+  .about-topbar__right {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    padding: 0.45rem 0.85rem;
+    max-width: 20rem;
+  }
+
+  .about-topbar__social-link {
+    padding: 0.32rem 0.62rem;
+    font-size: 0.5rem;
+    gap: 0.32rem;
+  }
+
+  /* Main copy: centered horizontally, flows top→bottom (not pinned mid-screen) */
+  .about-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 11.5rem 1.25rem 10.5rem;
+    box-sizing: border-box;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .about-content .menu,
+  .about-content .sub-container {
+    pointer-events: auto;
+  }
+
+  /* Action buttons — stacked, centered, well above theme toggle */
+  .about-bottom-btns {
+    position: fixed;
+    bottom: max(4.85rem, calc(env(safe-area-inset-bottom) + 4rem));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.7rem;
+    width: min(16.5rem, calc(100% - 2.5rem));
+    padding: 0;
+  }
+
+  .about-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.58rem;
+    padding: 0.55rem 1rem;
+    letter-spacing: 0.08em;
+  }
+
+  .menu {
+    width: 100%;
+    justify-content: center;
+    padding: 0.35rem 0 1rem;
+    gap: 0.45rem;
+  }
+
+  .item {
+    justify-content: center;
+    padding: 0.45rem 0.85rem;
+  }
+
+  .title {
+    font-size: 0.82rem;
+  }
+
+  .item.active .title {
+    font-size: 0.95rem;
+  }
+
+  .sub-container {
+    width: min(92vw, 21rem);
+    max-width: 21rem;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .icon-title-container {
+    justify-content: center;
+    align-items: center;
+    gap: 0.65rem;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .icon-title-container h3 {
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .sub-container > div:not(.active-subheading):not(.icon-title-container) h3 {
+    text-align: center;
+  }
+
+  .sub-container > div:not(.active-subheading):not(.icon-title-container):hover h3 {
+    padding-left: 0;
+  }
+
+  .sub-container-1.active-subheading h3,
+  .sub-container-2.active-subheading h3,
+  .sub-container-3.active-subheading h3 {
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .active-subheading .p-container {
+    align-items: center;
+    text-align: center;
+    gap: 0.85rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .p-container p,
+  .cta-text,
+  .cta-up-text {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  /* ── Skills: full-width scroll section, not a floating middle card ── */
+  #skills.page-section {
+    min-height: auto !important;
+  }
+
+  .skills-wrapper {
+    width: 100%;
+  }
+
+  .skills-wrapper .scroll-cue {
+    display: none !important;
+  }
+
+  .skills-page {
+    min-height: auto;
+    max-height: none;
+    overflow: visible;
+    width: 100%;
+    align-items: stretch;
+    padding: 3rem 1.25rem 3.25rem;
+    justify-content: flex-start;
+    box-sizing: border-box;
+  }
+
+  .skills-page::before,
+  .skills-page::after {
+    display: none;
+  }
+
+  .skills-header {
+    text-align: center;
+    margin-bottom: 1.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skills-subtitle {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.35rem;
+    opacity: 0.85;
+  }
+
+  .skills-title {
+    font-size: 1.55rem;
+    letter-spacing: 0.14em;
+  }
+
+  .skills-content {
+    max-height: none;
+    overflow: visible;
+    width: 100%;
+    max-width: none;
+    gap: 1.35rem;
+    padding: 0;
+  }
+
+  .skills-section {
+    margin: 0;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  }
+
+  .skills-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .category-title {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    margin: 0 0 0.55rem;
+    padding-bottom: 0.25rem;
+    text-align: left;
+  }
+
+  .bubbles-container {
+    justify-content: flex-start;
+    gap: 0.4rem;
+  }
+
+  .bubble {
+    font-size: 0.58rem;
+    padding: 0.24rem 0.55rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Contact ──────────────────────────────────────────────── */
+  .contact-hero {
+    align-items: center !important;
+    text-align: center;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .hero-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-thin,
+  .hero-bold,
+  .hero-sub {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tagline-section {
+    text-align: center;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .tagline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .info-strip {
+    text-align: center;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+
+  .info-block {
+    align-items: center;
+    text-align: center;
+  }
+
+  .platforms-grid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .platform-card .card-info {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  /* ── Projects ─────────────────────────────────────────────── */
+  .mobile-header {
+    text-align: center;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .mobile-header-label,
+  .mobile-heading {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .theme-toggle__label {
+    max-width: 6.5rem;
+    white-space: nowrap;
+  }
+
+  /* Breathing room between major page sections */
+  .page-section {
+    min-height: auto;
+  }
+
+  #projects.page-section {
+    padding-bottom: 0.5rem;
+  }
+
+  #contact.page-section {
+    padding-top: 0.5rem;
+  }
+}

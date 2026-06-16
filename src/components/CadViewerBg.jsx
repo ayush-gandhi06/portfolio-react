@@ -177,6 +177,20 @@ export default function CadViewerBg() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Touch tilt on phones (mirrors subtle desktop mouse tilt)
+  useEffect(() => {
+    const onTouch = (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      targetRef.current = {
+        x: (t.clientX - window.innerWidth / 2) / (window.innerWidth / 2),
+        y: (t.clientY - window.innerHeight / 2) / (window.innerHeight / 2),
+      };
+    };
+    window.addEventListener("touchmove", onTouch, { passive: true });
+    return () => window.removeEventListener("touchmove", onTouch);
+  }, []);
+
   return (
     <div
       className="cad-bg"

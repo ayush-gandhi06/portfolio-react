@@ -31,15 +31,16 @@ const EnvelopeIcon = () => (
   </svg>
 );
 
+const SECTIONS = ['about', 'projects', 'skills', 'contact'];
+
 export default function Nav() {
   const [activeSection, setActiveSection] = useState('about');
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'projects', 'skills', 'contact'];
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-      for (const section of sections) {
+      for (const section of SECTIONS) {
         const element = document.getElementById(section);
         if (element) {
           const { top, bottom } = element.getBoundingClientRect();
@@ -55,7 +56,7 @@ export default function Nav() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -96,13 +97,11 @@ export default function Nav() {
   };
 
   return (
-    <>
-      <nav className="nav"> 
-        {renderNavLink("about", UserIcon)}
-        {renderNavLink("projects", StackIcon)}
-        {renderNavLink("skills", TargetIcon)}
-        {renderNavLink("contact", EnvelopeIcon)}
-      </nav>
-    </>
+    <nav className="nav"> 
+      {renderNavLink("about", UserIcon)}
+      {renderNavLink("projects", StackIcon)}
+      {renderNavLink("skills", TargetIcon)}
+      {renderNavLink("contact", EnvelopeIcon)}
+    </nav>
   );
 }
